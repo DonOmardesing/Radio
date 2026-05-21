@@ -1,0 +1,323 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMAR RADIO STATION - Premium DJ</title>
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <link href="[https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@400;700;900&family=Archivo+Black&display=swap](https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@400;700;900&family=Archivo+Black&display=swap)" rel="stylesheet">
+    <script src="[https://unpkg.com/lucide@latest](https://unpkg.com/lucide@latest)"></script>
+    <style>
+        :root {
+            --neon-red: #ff0505;
+            --deep-black: #000000;
+            --spotify-green: #1DB954;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--deep-black);
+            margin: 0; padding: 0;
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            color: white; overflow-x: hidden;
+        }
+
+        .full-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background-image: 
+                radial-gradient(circle at center, rgba(0,0,0,0.5) 0%, rgba(0,0,0,1) 100%),
+                url('[https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=2000&auto=format&fit=crop](https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=2000&auto=format&fit=crop)');
+            background-size: cover; background-position: center;
+            filter: contrast(1.4) brightness(0.4);
+        }
+
+        .header-container { padding-top: 20px; text-align: center; width: 100%; z-index: 10; }
+
+        .status-badge {
+            background: var(--neon-red); color: white;
+            font-size: 9px; font-weight: 900; padding: 4px 12px;
+            border-radius: 4px; display: inline-block;
+            letter-spacing: 2px; margin-bottom: 10px;
+            box-shadow: 0 0 15px var(--neon-red); text-transform: uppercase;
+        }
+
+        .main-title {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(1.2rem, 6vw, 2.4rem);
+            color: #000; text-transform: uppercase; line-height: 1.1;
+            -webkit-text-stroke: 1.5px var(--neon-red);
+            filter: drop-shadow(0 0 8px rgba(255, 5, 5, 0.6));
+            margin-bottom: 15px;
+        }
+
+        .marquee-line {
+            width: 100%; background: #000;
+            border-top: 1px solid var(--neon-red); border-bottom: 1px solid var(--neon-red);
+            padding: 8px 0; overflow: hidden; margin-bottom: 15px;
+            display: flex;
+        }
+
+        .marquee-content { 
+            display: flex; 
+            white-space: nowrap; 
+            animation: move-text 25s linear infinite;
+        }
+
+        .marquee-content span {
+            font-family: 'Archivo Black', sans-serif; font-size: 10px;
+            color: #fff; text-transform: uppercase; letter-spacing: 2px; padding-right: 50px;
+            display: inline-block;
+        }
+
+        @keyframes move-text { 
+            0% { transform: translateX(0); } 
+            100% { transform: translateX(-50%); } 
+        }
+
+        .console-box {
+            width: 94%; max-width: 420px;
+            background: rgba(8, 8, 8, 0.95);
+            border: 1px solid rgba(255, 5, 5, 0.15);
+            border-radius: 25px; padding: 15px;
+            box-shadow: 0 30px 80px rgba(0,0,0,1);
+            z-index: 10; margin-bottom: 30px;
+        }
+
+        .spotify-container { border-radius: 15px; overflow: hidden; margin-bottom: 15px; background: #000; border: 1px solid #1DB954; }
+
+        .gold-cassette-css {
+            width: 160px; height: 100px;
+            margin: 0 auto 15px;
+            background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            border-radius: 8px;
+            position: relative;
+            padding: 6px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.7), inset 0 0 10px rgba(255,255,255,0.4);
+            border: 1px solid #806000;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+
+        .cassette-label {
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.08);
+            border-radius: 5px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 6px;
+        }
+
+        .cassette-window {
+            width: 70px; height: 25px;
+            background: #111;
+            border-radius: 4px;
+            border: 2px solid #b38728;
+            display: flex; justify-content: space-around; align-items: center;
+        }
+
+        .reel {
+            width: 16px; height: 16px;
+            border: 2px solid #333;
+            border-radius: 50%;
+            background: radial-gradient(circle, #222 20%, #444 21%, #111 100%);
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .live-btn {
+            width: 100%;
+            background: var(--spotify-green);
+            color: black;
+            padding: 12px;
+            border-radius: 14px;
+            font-weight: 900;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            box-shadow: 0 0 25px rgba(29, 185, 84, 0.4);
+            animation: pulse-live 2s infinite;
+            text-decoration: none;
+        }
+
+        .btn-subtitle { font-size: 8px; opacity: 0.7; font-weight: 700; margin-top: -2px; }
+
+        .free-link {
+            display: block; text-align: center; color: #aaa; font-size: 10px;
+            text-decoration: underline; margin-bottom: 20px; font-weight: 600;
+        }
+
+        @keyframes pulse-live {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(29, 185, 84, 0.7); }
+            50% { transform: scale(1.02); box-shadow: 0 0 15px 5px rgba(29, 185, 84, 0.3); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(29, 185, 84, 0); }
+        }
+
+        .pad {
+            background: #0d0d0d; border: 1px solid rgba(255, 5, 5, 0.1);
+            border-radius: 15px; padding: 12px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            height: 75px; transition: 0.1s;
+        }
+
+        .pad:active { transform: scale(0.95); border-color: var(--neon-red); background: #150000; }
+        .pad-type { font-size: 7px; color: var(--neon-red); font-weight: 900; letter-spacing: 1px; margin-bottom: 2px; }
+        .pad-title { font-size: 10px; font-weight: 800; color: #fff; text-transform: uppercase; }
+
+        #toast {
+            visibility: hidden; min-width: 200px; background-color: #111; color: #fff;
+            text-align: center; border-radius: 8px; padding: 12px;
+            position: fixed; z-index: 1000; bottom: 20px; left: 50%;
+            transform: translateX(-50%); font-size: 13px; border: 1px solid var(--neon-red);
+        }
+
+        #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
+
+        #reviews-modal {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95);
+            z-index: 100; padding: 15px; flex-direction: column; align-items: center; justify-content: center;
+        }
+
+        .modal-card {
+            width: 100%; max-width: 380px; background: #0a0a0a;
+            border: 1px solid var(--neon-red); border-radius: 20px;
+            padding: 20px; max-height: 85vh; display: flex; flex-direction: column;
+        }
+
+        .review-list { margin-top: 15px; overflow-y: auto; flex-grow: 1; padding-right: 5px; }
+
+        .review-item {
+            background: rgba(255,255,255,0.02); border-left: 2px solid var(--neon-red);
+            padding: 10px; border-radius: 6px; margin-bottom: 10px;
+        }
+        .review-item b { color: var(--neon-red); font-size: 10px; text-transform: uppercase; display: block; }
+        .review-item p { font-size: 11px; color: #ccc; }
+    </style>
+</head>
+<body>
+
+    <div class="full-bg"></div>
+
+    <header class="header-container">
+        <div class="status-badge">RADIO LIVE</div>
+        <h1 class="main-title">OMAR<br>RADIO STATION</h1>
+    </header>
+
+    <div class="marquee-line">
+        <div class="marquee-content">
+            <span>SALSA • MERENGUE • POP 90S • TECHNO • REGGAE • LATIN JAZZ • R&B • SMOOTH JAZZ • ELECTRO HOUSE • ROCK • TROPICAL</span>
+            <span>SALSA • MERENGUE • POP 90S • TECHNO • REGGAE • LATIN JAZZ • R&B • SMOOTH JAZZ • ELECTRO HOUSE • ROCK • TROPICAL</span>
+        </div>
+    </div>
+
+    <main class="console-box">
+        <div class="spotify-container">
+            <iframe src="[https://open.spotify.com/embed/playlist/2tk34IKcVjTx8aidXZF4HL?utm_source=generator&theme=0](https://open.spotify.com/embed/playlist/2tk34IKcVjTx8aidXZF4HL?utm_source=generator&theme=0)" width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+        </div>
+
+        <div class="gold-cassette-css">
+            <div class="cassette-label">
+                <div class="cassette-window">
+                    <div class="reel"></div>
+                    <div class="reel"></div>
+                </div>
+            </div>
+        </div>
+
+        <a href="[https://open.spotify.com/socialsession/1Id4xPIRwe6ox3cDt3VnHa?si=BiJaZbiIRdSh66JoLIDYVg](https://open.spotify.com/socialsession/1Id4xPIRwe6ox3cDt3VnHa?si=BiJaZbiIRdSh66JoLIDYVg)" target="_blank" class="live-btn" onclick="showToast('Conectando Jam...')">
+            <div class="flex items-center gap-2">
+                <i data-lucide="radio" size="18"></i>
+                <span>OMARDEJMEJIA EN VIVO</span>
+            </div>
+            <span class="btn-subtitle">(Solo Spotify Premium)</span>
+        </a>
+
+        <a href="[https://open.spotify.com/playlist/2tk34IKcVjTx8aidXZF4HL](https://open.spotify.com/playlist/2tk34IKcVjTx8aidXZF4HL)" target="_blank" class="free-link">
+            ¿No eres Premium? Escucha la Playlist aquí
+        </a>
+
+        <div class="grid grid-cols-2 gap-3 mb-4">
+            <button class="pad" onclick="showToast('Voz Omar 1 activada')">
+                <span class="pad-type">IDENTIFICADOR</span>
+                <span class="pad-title">Omar Voz 1</span>
+            </button>
+            <button class="pad" onclick="showToast('Voz Omar 2 activada')">
+                <span class="pad-type">ESTACIÓN</span>
+                <span class="pad-title">Omar Voz 2</span>
+            </button>
+            <button class="pad" onclick="showToast('Efecto Mix Drop')">
+                <span class="pad-type">EFECTO</span>
+                <span class="pad-title">Mix Drop</span>
+            </button>
+            <button class="pad" onclick="showToast('Outro cargado')">
+                <span class="pad-type">CIERRE</span>
+                <span class="pad-title">Outro Omar</span>
+            </button>
+        </div>
+
+        <div class="flex gap-2">
+            <button onclick="toggleModal()" class="flex-1 bg-white text-black py-3 rounded-xl font-black text-[11px] uppercase flex items-center justify-center gap-2">
+                <i data-lucide="star" size="14"></i> Reseñas
+            </button>
+            <button id="btnShare" class="bg-white/10 text-white w-12 rounded-xl flex items-center justify-center border border-white/20 active:scale-90 transition-transform">
+                <i data-lucide="share-2" size="20"></i>
+            </button>
+        </div>
+    </main>
+
+    <div id="reviews-modal">
+        <div class="modal-card">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-white font-black text-lg tracking-tighter">OPINIONES</h2>
+                <button onclick="toggleModal()" class="text-white/40"><i data-lucide="x"></i></button>
+            </div>
+            <div id="review-list" class="review-list">
+                <div class="review-item"><b>Carlos DJ Pro</b><p>Excelente calidad de audio.</p></div>
+                <div class="review-item"><b>Andrés Studio</b><p>Los IDs de voz suenan de lujo.</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast">Acción realizada</div>
+
+    <script>
+        lucide.createIcons();
+
+        const btnShare = document.getElementById('btnShare');
+        btnShare.addEventListener('click', async () => {
+            const shareData = { title: 'Omar Radio Station', text: 'Sintoniza mi radio:', url: window.location.href };
+            try {
+                if (navigator.share) { await navigator.share(shareData); } 
+                else { 
+                    const dummy = document.createElement('input');
+                    document.body.appendChild(dummy);
+                    dummy.value = window.location.href;
+                    dummy.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(dummy);
+                    showToast("Link copiado"); 
+                }
+            } catch (err) { showToast("Error al compartir"); }
+        });
+
+        function toggleModal() {
+            const m = document.getElementById('reviews-modal');
+            m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg; t.className = "show";
+            setTimeout(() => { t.className = ""; }, 2500);
+        }
+    </script>
+</body>
+</html>
+
+```
