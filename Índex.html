@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Don Omar Radio - Música Continua 24/7 Desde Medellín</title>
+<meta name="description" content="Don Omar Radio - 6 emisoras curadas 24/7: Joe 2000, Rock 80s, Smooth Jazz, Metal, Tecno Dance y Chillout. Desde Medellín, Colombia para el mundo.">
+<meta name="theme-color" content="#0066cc">
+<meta property="og:title" content="Don Omar Radio">
+<meta property="og:description" content="Música Continua 24/7 Desde Medellín Colombia">
+<meta property="og:image" content="https://i.postimg.cc/LX71S6Qg/ADB05A68-4BD7-4A81-9C1F-E12F268158D6.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="https://i.postimg.cc/LX71S6Qg/ADB05A68-4BD7-4A81-9C1F-E12F268158D6.png">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden; -webkit-tap-highlight-color: transparent;}
+.header{background:linear-gradient(180deg,#001133 0%,#000 100%);padding:30px 20px 20px;border-bottom:3px solid #0066cc;position:relative;text-align:center}
+.logo img{max-width:340px;width:90%;height:auto;display:block;margin:0 auto;filter:drop-shadow(0 0 20px rgba(0,204,255,0.4))}
+.time-display{position:absolute;top:20px;right:20px;color:#00ccff;font-size:18px;font-weight:900;letter-spacing:2px;font-family:'Bebas Neue',cursive;background:rgba(0,204,255,0.1);border:1px solid rgba(0,204,255,0.3);padding:6px 12px;border-radius:20px}
+.sound-wave{display:flex;justify-content:center;gap:4px;height:40px;align-items:center;margin:15px 0}
+.sound-wave span{width:4px;background:linear-gradient(180deg,#0066cc,#00ccff);animation:wave 0.7s ease-in-out infinite;border-radius:2px}
+.sound-wave span:nth-child(1){height:15px;animation-delay:0s}.sound-wave span:nth-child(2){height:30px;animation-delay:0.1s}.sound-wave span:nth-child(3){height:20px;animation-delay:0.2s}.sound-wave span:nth-child(4){height:40px;animation-delay:0.3s}.sound-wave span:nth-child(5){height:25px;animation-delay:0.4s}.sound-wave span:nth-child(6){height:15px;animation-delay:0.3s}.sound-wave span:nth-child(7){height:30px;animation-delay:0.2s}.sound-wave span:nth-child(8){height:20px;animation-delay:0.1s}
+@keyframes wave{0%,100%{transform:scaleY(0.6)}50%{transform:scaleY(1)}}
+
+.hero{padding:25px 20px 5px;text-align:center}
+.section-title{color:#00ccff;font-size:32px;letter-spacing:6px;text-transform:uppercase;text-shadow:0 0 20px rgba(0,204,255,0.6);font-family:'Bebas Neue',cursive;line-height:1}
+.section-subtitle{color:#fff;opacity:0.7;font-size:14px;letter-spacing:4px;margin-top:6px;font-family:'Bebas Neue',cursive}
+.now-playing-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(0,17,51,0.95);backdrop-filter:blur(15px);border-top:2px solid #00ccff;padding:10px 20px;display:none;align-items:center;gap:15px;z-index:999;transform:translateY(100%);transition:transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)}
+.now-playing-bar.active{display:flex;transform:translateY(0)}
+.now-playing-bar img{width:48px;height:48px;border-radius:8px}
+.now-playing-bar-info{flex:1}
+.now-playing-bar-info b{font-family:'Bebas Neue',cursive;letter-spacing:2px;font-size:18px;display:block}
+.now-playing-bar-info span{font-size:12px;opacity:0.7}
+
+.stations-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;padding:25px;max-width:980px;margin:0 auto 80px}
+.station-card{position:relative;border:3px solid;border-radius:20px;overflow:hidden;transition:all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);background:linear-gradient(135deg,#001133 0%,#0a0a0a 100%);display:flex;flex-direction:column;min-height:340px}
+.station-card:hover{transform:translateY(-8px) scale(1.02)}
+.station-card.active{transform:translateY(-8px) scale(1.02);box-shadow:0 0 50px currentColor !important}
+.station-card-header{padding:18px 15px 14px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.08);position:relative}
+.station-card-header h3{font-family:'Bebas Neue',cursive;font-size:26px;letter-spacing:3px;color:#fff;text-transform:uppercase;margin:0;line-height:1}
+.station-card-header p{font-size:10px;color:#aaa;letter-spacing:3px;margin-top:5px;text-transform:uppercase}
+.live-dot{width:8px;height:8px;background:#ff0000;border-radius:50%;display:inline-block;margin-right:6px;box-shadow:0 0 8px #ff0000;animation:pulse 1.5s infinite}
+@keyframes pulse{0%{opacity:1}50%{opacity:0.3}100%{opacity:1}}
+.station-card-body{flex:1;padding:12px;display:flex;align-items:center;justify-content:center;background:#f9f0f0;position:relative}
+.station-card-body .mytuner-widget{width:100%;max-width:100%;border:none !important;border-radius:12px !important;overflow:hidden !important}
+.station-card.btn-classical{border-color:#00ccff;color:#00ccff;box-shadow:0 0 18px rgba(0,204,255,0.25)}
+.station-card.btn-rock{border-color:#ff0000;color:#ff0000;box-shadow:0 0 18px rgba(255,0,0,0.25)}
+.station-card.btn-jazz{border-color:#e0e0e0;color:#e0e0e0;box-shadow:0 0 18px rgba(224,224,224,0.25)}
+.station-card.btn-hits{border-color:#00ffcc;color:#00ffcc;box-shadow:0 0 18px rgba(0,255,204,0.25)}
+
+.social-section{background:linear-gradient(180deg,#000 0%,#001133 100%);border-top:3px solid #0066cc;padding:35px 20px 50px}
+.social-title{text-align:center;color:#00ccff;font-size:22px;letter-spacing:5px;margin-bottom:25px;text-transform:uppercase;font-family:'Bebas Neue',cursive;text-shadow:0 0 15px rgba(0,204,255,0.6)}
+.social-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;max-width:500px;margin:0 auto}
+.social-btn{width:68px;height:68px;border:3px solid;border-radius:16px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all 0.3s;background:rgba(255,255,255,0.03)}
+.social-btn:hover{transform:translateY(-6px) scale(1.1)}
+.social-btn svg{width:32px;height:32px}
+.youtube{border-color:#ff0000}.youtube:hover{background:rgba(255,0,0,0.2);box-shadow:0 0 30px rgba(255,0,0,0.6)}
+.spotify{border-color:#1db954}.spotify:hover{background:rgba(29,185,84,0.2);box-shadow:0 0 30px rgba(29,185,84,0.6)}
+.whatsapp{border-color:#25d366}.whatsapp:hover{background:rgba(37,211,102,0.2);box-shadow:0 0 30px rgba(37,211,102,0.6)}
+.tiktok{border-color:#ff0050}.tiktok:hover{background:rgba(255,0,80,0.2);box-shadow:0 0 30px rgba(255,0,80,0.6)}
+.footer{text-align:center;padding:35px;background:#000;border-top:1px solid rgba(0,102,204,0.3)}
+.footer-logo{width:90px;height:90px;border:3px solid #0066cc;border-radius:50%;margin:0 auto 15px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 30px rgba(0,102,204,0.5);background:radial-gradient(circle at center,#001133,#000)}
+.footer-logo h3{color:#00ccff;font-size:18px;text-align:center;font-family:'Bebas Neue',cursive;letter-spacing:2px;line-height:0.9}
+@media(max-width:768px){.stations-grid{grid-template-columns:1fr;gap:18px;padding:18px} .station-card{min-height:360px} .time-display{position:static;margin:10px auto 0;display:inline-block} .header{padding:20px 15px} }
+</style>
+</head>
+<body>
+
+<div class="header">
+<div class="logo"><img src="https://i.postimg.cc/LX71S6Qg/ADB05A68-4BD7-4A81-9C1F-E12F268158D6.png" alt="Don Omar Radio"></div>
+<div class="time-display" id="currentTime">--:-- --</div>
+<div class="sound-wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+</div>
+
+<div class="hero">
+<div class="section-title">ELIJE TU FRECUENCIA</div>
+<div class="section-subtitle">6 EMISORAS CURADAS 24/7 DESDE MEDELLÍN</div>
+</div>
+
+<div class="stations-grid">
+
+<div class="station-card btn-classical" data-name="Joe 2000">
+<div class="station-card-header"><h3>Joe 2000</h3><p><span class="live-dot"></span>Clásicos del 2000s</p></div>
+<div class="station-card-body"><div id="widget-1" class="mytuner-widget" data-requires_initialization="true" data-player_id="1f8b0b0a-1b0b-4b0b-8b0b-0b0b0b0b0b0b" data-playertype="2"></div></div>
+</div>
+
+<div class="station-card btn-rock" data-name="Rock 80s">
+<div class="station-card-header"><h3>Rock 80s</h3><p><span class="live-dot"></span>Rock Clásico</p></div>
+<div class="station-card-body"><div id="widget-2" class="mytuner-widget" data-requires_initialization="true"></div></div>
+</div>
+
+<div class="station-card btn-jazz" data-name="Smooth Jazz">
+<div class="station-card-header"><h3>Smooth Jazz</h3><p><span class="live-dot"></span>Jazz Suave</p></div>
+<div class="station-card-body"><div id="widget-3" class="mytuner-widget" data-requires_initialization="true"></div></div>
+</div>
+
+<div class="station-card btn-hits" data-name="Metal">
+<div class="station-card-header"><h3>Metal</h3><p><span class="live-dot"></span>Metal Extremo</p></div>
+<div class="station-card-body"><div id="widget-4" class="mytuner-widget" data-requires_initialization="true"></div></div>
+</div>
+
+<div class="station-card btn-classical" data-name="Tecno Dance">
+<div class="station-card-header"><h3>Tecno Dance</h3><p><span class="live-dot"></span>Electrónica</p></div>
+<div class="station-card-body"><div id="widget-5" class="mytuner-widget" data-requires_initialization="true"></div></div>
+</div>
+
+<div class="station-card btn-jazz" data-name="Chillout">
+<div class="station-card-header"><h3>Chillout</h3><p><span class="live-dot"></span>Relax & Lounge</p></div>
+<div class="station-card-body"><div id="widget-6" class="mytuner-widget" data-requires_initialization="true"></div></div>
+</div>
+
+</div>
+
+<div class="now-playing-bar" id="nowBar">
+<img src="https://i.postimg.cc/LX71S6Qg/ADB05A68-4BD7-4A81-9C1F-E12F268158D6.png" alt="Don Omar">
+<div class="now-playing-bar-info"><b id="nowName">Don Omar Radio</b><span id="nowStatus">Selecciona una emisora para comenzar</span></div>
+</div>
+
+<div class="social-section">
+<div class="social-title">SÍGUENOS EN:</div>
+<div class="social-links">
+<a href="https://youtube.com/@donomar_radio?si=OFrcB6YWxbnapiOx" target="_blank" rel="noopener noreferrer" class="social-btn youtube" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="#ff0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+<a href="https://open.spotify.com/user/31ayh7eqvgueiw4xuufzokzxrmey?si=XOYKMvioQhWPbyw_edX5Kg&utm_source=copy-link" target="_blank" rel="noopener noreferrer" class="social-btn spotify" aria-label="Spotify"><svg viewBox="0 0 24 24" fill="#1db954"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a>
+<a href="https://wa.me/573008150549" target="_blank" rel="noopener noreferrer" class="social-btn whatsapp" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+<a href="https://www.tiktok.com/@marka_voz?_r=1&_t=ZS-97p9Wa4yabi" target="_blank" rel="noopener noreferrer" class="social-btn tiktok" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="#ff0050"><path d="M19.59 6.69a4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 0 01-5.2 1.74 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005.8 20.1a6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.84-.1z"/></svg></a>
+</div>
+</div>
+
+<div class="footer">
+<div class="footer-logo"><h3>DON<br>OMAR<br>RADIO</h3></div>
+<p>TODOS LOS DERECHOS RESERVADOS</p>
+<p>DONOMARDESING 2026 - MEDELLÍN</p>
+</div>
+
+<script>
+// Reloj
+function updateTime(){
+    const now = new Date();
+    let h = now.getHours(), m = now.getMinutes().toString().padStart(2,'0');
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12; h = h ? h : 12;
+    document.getElementById('currentTime').textContent = h+':'+m+' '+ampm;
+}
+setInterval(updateTime,1000); updateTime();
+
+// FIX DEFINITIVO MYTUNER - UNA SOLA CARGA + AUTO-PAUSA
+(function(){
+  const widgetIds = ["widget-1","widget-2","widget-3","widget-4","widget-5","widget-6"];
+  const cards = document.querySelectorAll('.station-card');
+  const nowBar = document.getElementById('nowBar');
+  const nowName = document.getElementById('nowName');
+  const nowStatus = document.getElementById('nowStatus');
+
+  window.mytuner_scripts = window.mytuner_scripts || {};
+  mytuner_scripts["player-v1.js_queue"] = [];
+
+  function loadScript(src, cb){
+    const s = document.createElement("script");
+    s.src = src; s.defer = true;
+    s.onload = cb;
+    document.head.appendChild(s);
+  }
+
+  function initAll(){
+    widgetIds.forEach(id=>{
+      const el = document.getElementById(id);
+      if(el && el.dataset.requires_initialization === "true"){
+        try{ mytuner_scripts["player-v1.js"](id); el.dataset.requires_initialization="false"; }catch(e){console.warn(e)}
+      }
+    });
+    // Observador para que solo suene UNA emisora a la vez
+    const observer = new MutationObserver(muts=>{
+      muts.forEach(m=>{
+        const btn = m.target;
+        if(btn.classList.contains('playing')){
+          const card = btn.closest('.station-card');
+          const id = btn.getAttribute('data-id') || btn.id.replace('play-button','');
+          // Pausar los demas
+          widgetIds.forEach(otherId=>{
+            if(otherId !== id){
+              const otherBtn = document.getElementById(otherId+'play-button');
+              if(otherBtn && otherBtn.classList.contains('playing')) otherBtn.click();
+            }
+          });
+          // UI activa
+          cards.forEach(c=>c.classList.remove('active'));
+          if(card){ card.classList.add('active'); nowName.textContent = card.dataset.name; nowStatus.textContent = "Reproduciendo en vivo • Medellín"; nowBar.classList.add('active'); }
+        }
+      });
+    });
+
+    setTimeout(()=>{
+      widgetIds.forEach(id=>{
+        const playBtn = document.getElementById(id+'play-button');
+        if(playBtn) observer.observe(playBtn, {attributes:true, attributeFilter:['class']});
+      });
+    },1500);
+  }
+
+  widgetIds.forEach(id=>{
+    mytuner_scripts["player-v1.js_queue"].push(function(){
+      const el=document.getElementById(id);
+      if(el && el.dataset.requires_initialization==="true"){
+        mytuner_scripts["player-v1.js"](id);
+        el.dataset.requires_initialization="false";
+      }
+    });
+  });
+
+  loadScript("https://mytuner-radio.com/static/js/widgets/player-v1.js", function(){
+    mytuner_scripts["player-v1.js-imported"]=true;
+    mytuner_scripts["player-v1.js_queue"].forEach(fn=>{ try{fn()}catch(e){} });
+    initAll();
+    loadScript("https://mytuner-radio.com/static/js/widgets/widget-player-v1.js");
+  });
+})();
+</script>
+
+</body>
+</html>
