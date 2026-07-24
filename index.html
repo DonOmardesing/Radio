@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Don Omar Radio - Música Continua 24/7</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{background:#000;color:#fff;font-family:'Inter',sans-serif}
+.header{background:linear-gradient(180deg,#001133 0%,#000 100%);padding:30px 20px 20px;border-bottom:3px solid #0066cc;text-align:center}
+.logo img{max-width:340px;width:90%;display:block;margin:0 auto}
+.stations-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;padding:25px;max-width:980px;margin:0 auto 80px}
+.station-card{border:3px solid;border-radius:20px;overflow:hidden;background:linear-gradient(135deg,#001133 0%,#0a0a0a 100%);display:flex;flex-direction:column;min-height:200px}
+.station-card-body{flex:1;padding:0;display:flex;align-items:stretch;background:#0a0a0a}
+.btn-classical{border-color:#00ccff;color:#00ccff}.btn-rock{border-color:#ff0000;color:#ff0000}.btn-jazz{border-color:#e0e0e0;color:#e0e0e0}.btn-hits{border-color:#00ffcc;color:#00ffcc}
+.social-section{background:linear-gradient(180deg,#000 0%,#001133 100%);border-top:3px solid #0066cc;padding:35px 20px 50px;text-align:center}
+.footer{text-align:center;padding:35px;background:#000;border-top:1px solid rgba(0,102,204,0.3)}
+@media(max-width:768px){.stations-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="header"><div class="logo"><img src="https://i.postimg.cc/LX71S6Qg/ADB05A68-4BD7-4A81-9C1F-E12F268158D6.png" alt="Don Omar Radio"></div></div>
+<div style="text-align:center;padding:20px"><h1 style="font-family:'Bebas Neue';color:#00ccff;letter-spacing:6px">MÚSICA CONTINUA 24/7</h1><p style="opacity:.6;letter-spacing:4px">MÚSICA SIN PARAR DESDE MEDELLÍN</p></div>
+<div class="stations-grid">
+<div class="station-card btn-classical"><div style="padding:14px;text-align:center"><h3 style="font-family:'Bebas Neue';letter-spacing:3px">JOE 2000</h3></div><div class="station-card-body"><div id="widget-1" class="mytuner-widget" data-target="457231" data-requires_initialization="true" data-autoplay="false" style="width:100%"></div></div></div>
+<div class="station-card btn-rock"><div style="padding:14px;text-align:center"><h3 style="font-family:'Bebas Neue';letter-spacing:3px">ROCK 80S</h3></div><div class="station-card-body"><div id="widget-2" class="mytuner-widget" data-target="492680" data-requires_initialization="true" data-autoplay="false" style="width:100%"></div></div></div>
+<div class="station-card btn-jazz"><div style="padding:14px;text-align:center"><h3 style="font-family:'Bebas Neue';letter-spacing:3px">SMOOTH JAZZ</h3></div><div class="station-card-body"><div id="widget-3" class="mytuner-widget" data-target="492676" data-requires_initialization="true" data-autoplay="false" style="width:100%"></div></div></div>
+<div class="station-card btn-rock"><div style="padding:14px;text-align:center"><h3 style="font-family:'Bebas Neue';letter-spacing:3px">METAL</h3></div><div class="station-card-body"><div id="widget-4" class="mytuner-widget" data-target="511498" data-requires_initialization="true" data-autoplay="false" style="width:100%"></div></div></div>
+<div class="station-card btn-classical"><div style="padding:14px;text-align:center"><h3 style="font-family:'Bebas Neue';letter-spacing:3px">TECNO</h3></div><div class="station-card-body"><div id="widget-5" class="mytuner-widget" data-target="492674" data-requires_initialization="true" data-autoplay="false" style="width:100%"></div></div></div>
+<div class="station-card btn-hits"><div style="padding:14px;text-align:center"><h3 style="font-family:'Bebas Neue';letter-spacing:3px">CHILLOUT</h3></div><div class="station-card-body"><div id="widget-6" class="mytuner-widget" data-target="425019" data-requires_initialization="true" data-autoplay="false" style="width:100%"></div></div></div>
+</div>
+<div class="social-section"><p>SÍGUENOS EN:</p><p><a href="https://youtube.com/@donomar_radio" target="_blank">YouTube</a> | <a href="https://wa.me/573008150549" target="_blank">WhatsApp</a> | <a href="https://www.tiktok.com/@marka_voz" target="_blank">TikTok</a></p></div>
+<div class="footer"><p>TODOS LOS DERECHOS RESERVADOS - DONOMARDESING 2026</p></div>
+<script>
+(function(){const ids=["widget-1","widget-2","widget-3","widget-4","widget-5","widget-6"];window.mytuner_scripts=window.mytuner_scripts||{};mytuner_scripts["player-v1.js_queue"]=[];function loadScript(src,cb){const s=document.createElement("script");s.src=src;s.defer=true;s.onload=cb;document.head.appendChild(s);}ids.forEach(id=>{mytuner_scripts["player-v1.js_queue"].push(function(){const el=document.getElementById(id);if(el&&el.dataset.requires_initialization==="true"){try{mytuner_scripts["player-v1.js"](id);el.dataset.requires_initialization="false";}catch(e){}}});});loadScript("https://mytuner-radio.com/static/js/widgets/player-v1.js",function(){mytuner_scripts["player-v1.js-imported"]=true;mytuner_scripts["player-v1.js_queue"].forEach(fn=>{try{fn()}catch(e){}});loadScript("https://mytuner-radio.com/static/js/widgets/widget-player-v1.js");});})();
+</script>
+</body>
+</html>
