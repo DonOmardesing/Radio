@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Don Omar Radio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;color:#fff;font-family:'Bebas Neue',sans-serif}
+.top img{width:100%;display:block}
+.bar{text-align:center;padding:16px;border-top:3px solid #00aaff}
+.bar h1{color:#00ccff;font-size:32px;letter-spacing:6px}
+.bar p{color:#aaa;letter-spacing:4px;font-size:13px}
+.grid{padding:14px;max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}}
+.card{border:2px solid;border-radius:16px;overflow:hidden;background:#111}
+.head{padding:10px;text-align:center;background:#000e2a}
+.head h2{font-size:20px;letter-spacing:3px}
+.c1{border-color:#00ccff}.c1 h2{color:#00ccff}
+.c2{border-color:#ff0000}.c2 h2{color:#ff4444}
+.c3{border-color:#fff}.c3 h2{color:#fff}
+.c4{border-color:#00ffcc}.c4 h2{color:#00ffcc}
+.c5{border-color:#ffaa00}.c5 h2{color:#ffaa00}
+.c6{border-color:#aa00ff}.c6 h2{color:#aa44ff}
+.body{background:#fff;min-height:160px;padding:0}
+.footer{text-align:center;padding:20px;color:#555;font-size:10px;letter-spacing:2px;border-top:1px solid #222;margin-top:20px}
+</style>
+</head>
+<body>
+<div class="top"><img src="https://i.postimg.cc/LX71S6Qg/ADB05A68-4BD7-4A81-9C1F-E12F268158D6.png" alt="Don Omar Radio"></div>
+<div class="bar"><h1>MÚSICA CONTINUA 24/7</h1><p>MÚSICA SIN PARAR DESDE MEDELLÍN</p></div>
+<div class="grid">
+<div class="card c1"><div class="head"><h2>JOE 2000</h2></div><div class="body"><div id="w1" class="mytuner-widget" data-target="457231" data-requires_initialization="true" data-autoplay="false" style="width:100%"></div></div></div>
+<div class="card c2"><div class="head"><h2>ROCK 80S</h2></div><div class="body"><div id="w2" class="mytuner-widget" data-target="492680" data-requires_initialization="true" data-autoplay="false" style="width:100%"></div></div></div>
+<div class="card c3"><div class="head"><h2>SMOOTH JAZZ</h2></div><div class="body"><div id="w3" class="mytuner-widget" data-target="492676" data-requires_initialization="true" data-autoplay="false" style="width:100%"></div></div></div>
+<div class="card c4"><div class="head"><h2>TECNO</h2></div><div class="body"><div id="w4" class="mytuner-widget" data-target="492674" data-requires_initialization="true" data-autoplay="false" style="width:100%"></div></div></div>
+<div class="card c5"><div class="head"><h2>METAL</h2></div><div class="body"><div id="w5" class="mytuner-widget" data-target="511498" data-requires_initialization="true" data-autoplay="false" style="width:100%"></div></div></div>
+<div class="card c6"><div class="head"><h2>CHILLOUT</h2></div><div class="body"><div id="w6" class="mytuner-widget" data-target="425019" data-requires_initialization="true" data-autoplay="false" style="width:100%"></div></div></div>
+</div>
+<div class="footer">TODOS LOS DERECHOS RESERVADOS - DONOMARDESING 2026</div>
+<script>
+(function(){var ids=["w1","w2","w3","w4","w5","w6"];window.mytuner_scripts=window.mytuner_scripts||{};mytuner_scripts["player-v1.js_queue"]=[];function ls(s,c){var e=document.createElement("script");e.src=s;e.defer=true;e.onload=c;document.head.appendChild(e);}ids.forEach(function(id){mytuner_scripts["player-v1.js_queue"].push(function(){var el=document.getElementById(id);if(el&&el.dataset.requires_initialization==="true"){try{mytuner_scripts["player-v1.js"](id);el.dataset.requires_initialization="false";}catch(e){}}});});ls("https://mytuner-radio.com/static/js/widgets/player-v1.js",function(){mytuner_scripts["player-v1.js-imported"]=true;mytuner_scripts["player-v1.js_queue"].forEach(function(fn){try{fn()}catch(e){}});ls("https://mytuner-radio.com/static/js/widgets/widget-player-v1.js");});})();
+</script>
+</body>
+</html>
