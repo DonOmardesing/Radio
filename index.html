@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Don Omar Radio</title>
+<meta name="theme-color" content="#0066cc">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{background:#000;color:#fff;font-family:Arial,sans-serif;overflow-x:hidden}
+.header{background:linear-gradient(180deg,#001133 0%,#000 100%);padding:18px 0 10px;border-bottom:3px solid #0066cc;position:relative}
+.logo{text-align:center}.logo img{width:100%;max-width:600px;height:auto;display:block;margin:0 auto}
+.time-display{position:absolute;top:18px;right:18px;color:#fff;font-size:22px;font-weight:700;letter-spacing:2px;font-family:'Bebas Neue',cursive;background:rgba(0,0,0,.7);padding:6px 14px;border-radius:8px;border:2px solid #00ccff;box-shadow:0 0 18px rgba(0,204,255,.6);z-index:5}
+.sound-wave{display:flex;justify-content:center;gap:4px;height:34px;align-items:center;margin:12px 0}.sound-wave span{width:4px;height:18px;background:linear-gradient(180deg,#0066cc,#00ccff);animation:wave .6s ease-in-out infinite}
+.sound-wave span:nth-child(2){animation-delay:.1s}.sound-wave span:nth-child(3){animation-delay:.2s}.sound-wave span:nth-child(4){animation-delay:.3s}.sound-wave span:nth-child(5){animation-delay:.4s}.sound-wave span:nth-child(6){animation-delay:.5s}
+@keyframes wave{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1)}}
+.section-title{text-align:center;color:#00ccff;font-size:26px;letter-spacing:5px;margin:22px 0 4px;font-family:'Bebas Neue',cursive}
+.section-subtitle{text-align:center;color:#00ccff;font-size:14px;letter-spacing:4px;margin-bottom:16px;font-family:'Bebas Neue',cursive}
+.stations-list{max-width:700px;margin:0 auto;padding:0 14px}
+.station-block{margin-bottom:14px;border-radius:16px;overflow:hidden;border:3px solid #0066cc;background:#001133;transition:.3s}
+.station-block.playing{border-color:#00ccff;box-shadow:0 0 28px rgba(0,204,255,.55)}
+.station-img{width:100%;height:220px;background-size:cover;background-position:center}
+.station-info{padding:12px;text-align:center;background:#001133}
+.station-info h3{font-family:'Bebas Neue',cursive;font-size:26px;letter-spacing:3px;color:#fff;margin:0}
+.station-info p{font-size:11px;color:#8aa0b5;letter-spacing:3px;margin-top:2px}
+.player-area{background:#000a1a;padding:14px;display:flex;align-items:center;gap:12px}
+.play-btn{width:62px;height:62px;border-radius:50%;border:3px solid #00ccff;background:radial-gradient(circle at 30% 30%,#003a75,#000);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;box-shadow:0 0 18px rgba(0,204,255,.6)}
+.play-btn svg{width:26px;height:26px;fill:#fff;margin-left:3px}
+.play-meta{flex:1;min-width:0}
+.play-meta .status{font-family:'Bebas Neue',cursive;letter-spacing:2px;font-size:16px;color:#00ccff}
+.play-meta .now{font-size:12px;color:#cde9ff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px;opacity:.9}
+.mini-wave{display:none;gap:3px;height:18px;align-items:center}.station-block.playing .mini-wave{display:flex}.mini-wave span{width:3px;background:#00ccff;animation:wave .5s ease-in-out infinite}
+.divider{height:2px;background:linear-gradient(90deg,transparent,#00ccff,transparent);margin:18px auto;max-width:700px}
+.social-section{background:linear-gradient(180deg,#000 0%,#001133 100%);border-top:3px solid #0066cc;padding:22px 14px}
+.social-title{text-align:center;color:#00ccff;font-size:18px;letter-spacing:4px;margin-bottom:16px;font-family:'Bebas Neue',cursive}
+.social-links{display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
+.social-btn{width:68px;height:68px;border:3px solid;border-radius:16px;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:.2s;flex-shrink:0}
+.social-btn svg{width:32px;height:32px;display:block}
+.youtube{border-color:#FF0000;background:rgba(255,0,0,.15)}
+.spotify{border-color:#1DB954;background:rgba(29,185,84,.15)}
+.whatsapp{border-color:#25D366;background:rgba(37,211,102,.15)}
+.tiktok{border-color:#fff;background:#000}
+.footer{text-align:center;padding:24px;background:#000;border-top:3px solid #0066cc}.footer-logo{width:86px;height:86px;border:3px solid #0066cc;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center}.footer-logo h3{color:#00ccff;font-size:17px;font-family:'Bebas Neue',cursive;line-height:1}.footer p{color:#fff;font-size:11px;letter-spacing:2px;margin:4px 0}
+@media(max-width:768px){.time-display{position:static;margin:10px auto 0;display:block;width:160px;text-align:center;font-size:18px}.station-img{height:180px}}
+</style>
+</head>
+<body>
+<div class="header">
+<div class="time-display" id="currentTime">--:-- --</div>
+<div class="logo"><img src="https://i.postimg.cc/LX71S6Qg/ADB05A68-4BD7-4A81-9C1F-E12F268158D6.png" alt="Don Omar Radio"></div>
+<div class="sound-wave"><span></span><span></span></div>
+</div>
+<div class="section-title">MUSICA CONTINUA 24/7</div>
+<div class="section-subtitle">DESDE MEDELLIN COLOMBIA</div>
+<div class="stations-list">
+
+<div class="station-block" id="block-80s">
+<div class="station-img" style="background-image:url('https://i.postimg.cc/DzXQXBJL/IMG-5277.jpg')"></div>
+<div class="station-info"><h3>80Y 90S FOREVER</h3><p>FROM MEDELLIN</p></div>
+<div class="player-area">
+<button class="play-btn" data-src="https://ice6.somafm.com/u80s-256-mp3"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+<div class="play-meta"><div class="status">DETENIDO</div><div class="now">EN VIVO HQ 256k • 80s & 90s HITS</div><div class="mini-wave"><span></span><span></span></div></div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<div class="station-block" id="block-jazz">
+<div class="station-img" style="background-image:url('https://i.postimg.cc/8kHRMF5z/IMG-3459.jpg')"></div>
+<div class="station-info"><h3>MY SMOOTH JAZZ</h3><p>FROM MEDELLIN</p></div>
+<div class="player-area">
+<button class="play-btn" data-src="https://ice6.somafm.com/groovesalad-256-mp3"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+<div class="play-meta"><div class="status">DETENIDO</div><div class="now">EN VIVO HQ 256k • SMOOTH JAZZ</div><div class="mini-wave"><span></span><span></span></div></div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<div class="station-block" id="block-rock">
+<div class="station-img" style="background-image:url('https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?auto=format&fit=crop&w=800&q=80')"></div>
+<div class="station-info"><h3>HARD ROCK</h3><p>FROM MEDELLIN</p></div>
+<div class="player-area">
+<button class="play-btn" data-src="https://streams.radiobob.de/hairmetal/aac-192"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+<div class="play-meta"><div class="status">DETENIDO</div><div class="now">EN VIVO HQ AAC 192k • HARD ROCK</div><div class="mini-wave"><span></span><span></span></div></div>
+</div>
+</div>
+
+<div class="divider"></div>
+<div style="max-width:700px;margin:0 auto;padding:12px 14px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+<button id="btnCafe" type="button" style="flex:1;min-width:200px;background:linear-gradient(180deg,#ffb700,#ff8c00);color:#000;border:none;border-radius:14px;padding:14px 18px;font-family:'Bebas Neue',cursive;letter-spacing:3px;font-size:18px;cursor:pointer;box-shadow:0 0 18px rgba(255,183,0,.5);">☕ INVÍTAME UN CAFÉ</button>
+<button id="btnHistoria" type="button" style="flex:1;min-width:200px;background:transparent;border:2px solid #00ccff;color:#00ccff;border-radius:14px;padding:12px 18px;font-family:'Bebas Neue',cursive;letter-spacing:3px;font-size:18px;cursor:pointer;">📻 NUESTRA HISTORIA</button>
+</div>
+
+<div class="divider"></div>
+<div class="station-block" id="block-experiences">
+<div class="station-img" style="background-image:url('https://i.postimg.cc/4NTc6C7x/754463056-1807907343901287-5374622758035572330-n.webp');background-position:center top;background-size:cover"></div>
+<div class="station-info"><h3>DON OMAR EXPERIENCES VOL 1</h3><p>FROM MEDELLIN</p></div>
+<div class="player-area">
+<button class="play-btn" type="button" data-experiences="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+<div class="play-meta"><div class="status">DETENIDO</div><div class="now">EN VIVO • DON OMAR EXPERIENCES VOL 1</div><div class="mini-wave"><span></span><span></span></div></div>
+</div>
+<div id="spotify-experiences-wrap" style="display:none;padding:0 12px 12px;background:#000a1a">
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2tk34IKcVjTx8aidXZF4HL?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+</div>
+</div>
+</div>
+
+<div class="social-section">
+<div class="social-title">SIGUENOS EN:</div>
+<div class="social-links">
+<a href="https://youtube.com/@donomar_radio?si=OFrcB6YWxbnapiOx" target="_blank" class="social-btn youtube" aria-label="YouTube"><svg viewBox="0 0 24 24"><path fill="#FFFFFF" d="M23.498 6.186a3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 0 0 0 2.122-2.136C24 15.93 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+<a href="https://open.spotify.com/user/31ayh7eqvgueiw4xuufzokzxrmey" target="_blank" class="social-btn spotify" aria-label="Spotify"><svg viewBox="0 0 24 24"><path fill="#1DB954" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a>
+<a href="https://wa.me/573008150549" target="_blank" class="social-btn whatsapp" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 0 00-3.48-8.413"/></svg></a>
+<a href="https://www.tiktok.com/@marka_voz?_r=1&_t=ZS-97p9Wa4yabi" target="_blank" class="social-btn tiktok" aria-label="TikTok"><svg viewBox="0 0 24 24"><path fill="#FFFFFF" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+</div>
+</div>
+<div class="footer"><div class="footer-logo"><h3>DON<br>OMAR<br>RADIO</h3></div><p>TODOS LOS DERECHOS RESERVADOS</p><p>DONOMARDESING 2026</p></div>
+
+<script>
+function updateTime(){const n=new Date();let h=n.getHours();const m=String(n.getMinutes()).padStart(2,'0');const ap=h>=12?'PM':'AM';h=h%12;h=h?h:12;document.getElementById('currentTime').textContent=h+':'+m+' '+ap}setInterval(updateTime,1000);updateTime();
+
+// --- REPRODUCTOR UNICO ANTI-SCRATCH ---
+const radioPlayer = new Audio();
+radioPlayer.preload = "none";
+radioPlayer.crossOrigin = "anonymous";
+let currentBlock = null;
+
+function resetAllUI(){
+  document.querySelectorAll('.station-block').forEach(b=>{
+    b.classList.remove('playing');
+    const s=b.querySelector('.status'); if(s) s.textContent='DETENIDO';
+    const pb=b.querySelector('.play-btn'); if(pb && !pb.dataset.experiences) pb.innerHTML='<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+  });
+  const w=document.getElementById('spotify-experiences-wrap');
+  if(w) w.style.display='none';
+}
+
+radioPlayer.addEventListener('waiting',()=>{ if(currentBlock) currentBlock.querySelector('.status').textContent='CONECTANDO...'; });
+radioPlayer.addEventListener('playing',()=>{ if(currentBlock) currentBlock.querySelector('.status').textContent='REPRODUCIENDO'; });
+radioPlayer.addEventListener('pause',()=>{ if(currentBlock && radioPlayer.src=='') currentBlock.querySelector('.status').textContent='PAUSADO'; });
+
+document.querySelectorAll('.play-btn').forEach(btn=>{
+  btn.addEventListener('click', async()=>{
+    const block = btn.closest('.station-block');
+
+    // Caso especial Spotify
+    if(block.id==='block-experiences'){
+      const wrap=document.getElementById('spotify-experiences-wrap');
+      const status=block.querySelector('.status');
+      if(block.classList.contains('playing')){
+        wrap.style.display='none'; block.classList.remove('playing'); status.textContent='PAUSADO';
+        btn.innerHTML='<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+        return;
+      }
+      try{ radioPlayer.pause(); radioPlayer.removeAttribute('src'); radioPlayer.load(); }catch(e){}
+      resetAllUI();
+      wrap.style.display='block'; block.classList.add('playing'); status.textContent='REPRODUCIENDO';
+      btn.innerHTML='<svg viewBox="0 0 24 24"><path d="M6 6h4v12H6zm8 0h4v12h-4z"/></svg>';
+      currentBlock = block;
+      wrap.scrollIntoView({behavior:'smooth',block:'center'});
+      return;
+    }
+
+    // Caso radio normal - TUS MISMAS EMISORAS
+    const streamUrl = btn.dataset.src;
+    if(currentBlock === block && !radioPlayer.paused){
+      radioPlayer.pause(); radioPlayer.removeAttribute('src'); radioPlayer.load();
+      resetAllUI(); currentBlock=null; return;
+    }
+
+    try{ radioPlayer.pause(); }catch(e){}
+    resetAllUI();
+    currentBlock = block;
+    block.classList.add('playing');
+    block.querySelector('.status').textContent='CONECTANDO...';
+    btn.innerHTML='<svg viewBox="0 0 24 24"><path d="M6 6h4v12H6zm8 0h4v12h-4z"/></svg>';
+    radioPlayer.src = streamUrl;
+    try{ await radioPlayer.play(); }catch(e){
+      block.querySelector('.status').textContent='TAP DE NUEVO';
+    }
+  });
+});
+</script>
+
+<!-- MODAL HISTORIA + APOYO - SIN CAMBIOS, SOLO SEPARADO -->
+<div id="modalOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.88);z-index:9999;overflow-y:auto;padding:20px 12px;">
+<div style="max-width:680px;margin:20px auto;background:#0a1930;border:2px solid #00ccff;border-radius:20px;overflow:hidden;">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#001133;border-bottom:2px solid #0066cc;">
+<div style="display:flex;align-items:center;gap:0;background:rgba(0,0,0,.4);border:1px solid #00ccff;border-radius:20px;padding:3px;">
+<button onclick="setLang('es')" id="langEs" style="background:#00ccff;color:#000;border:none;border-radius:16px;padding:6px 16px;font-weight:800;font-size:13px;cursor:pointer;">ESPAÑOL</button>
+<button onclick="setLang('en')" id="langEn" style="background:transparent;color:#8aa0b5;border:none;border-radius:16px;padding:6px 16px;font-weight:700;font-size:13px;cursor:pointer;">ENGLISH</button>
+</div>
+<button onclick="closeModal()" style="background:rgba(255,255,255,.1);border:none;color:#fff;border-radius:50%;width:32px;height:32px;cursor:pointer;">×</button>
+</div>
+<div id="contentHistoria" style="padding:20px;color:#cde9ff;font-size:14px;line-height:1.6;">
+<div class="lang-es">
+<h2 style="color:#00ccff;font-family:'Bebas Neue',cursive;letter-spacing:3px;font-size:26px;margin-bottom:12px;">DON OMAR RADIO MEDELLÍN</h2>
+<p>Aquí reunimos <b>90s Forever, My Smooth Jazz, Hard Rock</b> y <b>Don Omar Experiences Vol 1</b>, nuestra playlist exclusiva.</p>
+<p style="margin-top:12px;">Este proyecto fue creado para quienes trabajan, conducen, estudian o simplemente desean disfrutar de una excelente selección musical sin interrupciones.</p>
+<button onclick="openCafe()" style="width:100%;background:#ffb700;color:#000;border:none;border-radius:14px;padding:14px;font-family:'Bebas Neue',cursive;letter-spacing:2px;font-size:18px;margin-top:18px;cursor:pointer;">☕ APOYAR ESTE PROYECTO</button>
+<div style="text-align:center;margin-top:12px;"><button onclick="closeModal()" style="background:none;border:none;color:#8aa0b5;cursor:pointer;">Cerrar / Close</button></div>
+</div>
+<div class="lang-en" style="display:none;">
+<h2 style="color:#00ccff;font-family:'Bebas Neue',cursive;letter-spacing:3px;font-size:26px;margin-bottom:12px;">DON OMAR RADIO MEDELLIN</h2>
+<p>Here we bring together <b>90s Forever, My Smooth Jazz, Hard Rock</b> and <b>Don Omar Experiences Vol 1</b>.</p>
+<button onclick="openCafe()" style="width:100%;background:#ffb700;color:#000;border:none;border-radius:14px;padding:14px;font-family:'Bebas Neue',cursive;letter-spacing:2px;font-size:18px;margin-top:18px;cursor:pointer;">☕ SUPPORT THIS PROJECT</button>
+<div style="text-align:center;margin-top:12px;"><button onclick="closeModal()" style="background:none;border:none;color:#8aa0b5;cursor:pointer;">Cerrar / Close</button></div>
+</div>
+</div>
+<div id="contentCafe" style="display:none;padding:16px;background:#060e20;">
+  <!-- TODO TU CONTENIDO DE CAFE QUEDA IGUAL, NO LO TOQUE -->
+  <div class="lang-es"><h2 style="color:#fff;font-size:22px;margin-bottom:4px;font-weight:800;">Apoya la radio que te hace feliz</h2><p style="color:#8aa0b5;font-size:13px;margin-bottom:16px;">Elige tu nivel • Pago único</p>
+  <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px;margin-bottom:12px;">
+  <div style="font-weight:700;color:#fff;">☕ Café Musical</div><div style="font-weight:700;color:#fff;margin:8px 0;">$20.000 COP / $5 USD</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+  <a href="https://paypal.me/mensajeriaprivada/5" target="_blank" style="flex:1;min-width:110px;background:#fff;color:#000;border-radius:20px;padding:10px;text-align:center;text-decoration:none;font-weight:700;">PayPal $5</a>
+  <button onclick="copyText('3008150549')" style="flex:1;min-width:110px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:20px;padding:10px;cursor:pointer;">Copiar Bre-B 3008150549</button>
+  </div></div>
+  <div style="text-align:center;margin-top:10px;"><a href="https://wa.me/573008150549?text=Hola%20envi%C3%A9%20el%20soporte%20de%20Don%20Omar%20Radio" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#000;font-weight:700;padding:10px 18px;border-radius:20px;text-decoration:none;">📲 Por favor envía el soporte al WhatsApp</a></div>
+  <div style="text-align:center;margin-top:12px;"><button onclick="closeModal()" style="background:none;border:none;color:#8aa0b5;cursor:pointer;">Cerrar / Close</button></div>
+  </div>
+</div>
+</div>
+</div>
+<script>
+let currentLang='es';
+function setLang(l){ currentLang=l; document.getElementById('langEs').style.background=l==='es'?'#00ccff':'transparent'; document.getElementById('langEs').style.color=l==='es'?'#000':'#8aa0b5'; document.getElementById('langEn').style.background=l==='en'?'#00ccff':'transparent'; document.getElementById('langEn').style.color=l==='en'?'#000':'#8aa0b5'; document.querySelectorAll('.lang-es').forEach(e=>e.style.display=l==='es'?'block':'none'); document.querySelectorAll('.lang-en').forEach(e=>e.style.display=l==='en'?'block':'none'); }
+function openHistoria(){document.getElementById('contentHistoria').style.display='block';document.getElementById('contentCafe').style.display='none';document.getElementById('modalOverlay').style.display='block';setLang(currentLang);}
+function openCafe(){document.getElementById('contentHistoria').style.display='none';document.getElementById('contentCafe').style.display='block';document.getElementById('modalOverlay').style.display='block';setLang(currentLang);}
+function closeModal(){document.getElementById('modalOverlay').style.display='none';}
+function copyText(t){navigator.clipboard.writeText(t).then(()=>alert('Copiado: '+t));}
+document.getElementById('btnHistoria').addEventListener('click', openHistoria);
+document.getElementById('btnCafe').addEventListener('click', openCafe);
+</script>
+</body>
+</html>
