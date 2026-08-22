@@ -1,0 +1,23 @@
+name: fix radio
+on: push
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: inject script tag
+        run: |
+          if ! grep -q "fix-todo.js" index.html; then
+            if grep -q "</body>" index.html; then
+              sed -i 's|</body>|<script src="fix-todo.js"></script></body>|' index.html
+            else
+              echo '<script src="fix-todo.js"></script>' >> index.html
+            fi
+            git config user.name "bot"
+            git config user.email "bot@bot.com"
+            git add index.html
+            git commit -m "auto inject fix-todo.js" || echo "no changes"
+            git push
+          fi
